@@ -30,15 +30,27 @@ app.get('/', function(req, res){
 app.use('/dist', express.static(path.resolve(__dirname, '..', '..', 'dist')));
 app.use('/static', express.static(path.resolve(__dirname, '..', '..', 'static')));
 
-
 //game world
 const world = new World();
 
-let clearState = false
-if(clearState) {
-    world.clearState()
-    process.exit()
+//command line params
+var args = process.argv.slice(2);
+
+if ( args ){
+    var exit = false;
+    for( var i=0; i<args.length; i++ ){
+        var arg = args[i];
+        if( arg == '--clear' ) {
+            world.clearState();
+            console.log("Cleared World State");
+            exit = true;
+        }
+    }
+    if ( exit ) {
+        process.exit()
+    }
 }
+
 
 world.loadState()
 world.generateEnvironment()
@@ -54,7 +66,7 @@ io.on('connection', function(socket) {
         console.log('player-new')
         console.log(data)
 
-        var newPlayer = new Player(data.name, data.color, data.identifier);
+        var newPlayer = new Player(data.name, data.color, data.identifier, socket.identifier);
         world.addPlayer(newPlayer);
 
         socket.emit('player-init', newPlayer.serialize())
@@ -76,9 +88,10 @@ io.on('connection', function(socket) {
             console.log("Player is present")
             console.log(playerPresent)
             player = playerPresent
+            player.socketIdentifier = socket.identifier
         } else {
             console.log("Player is NOT present...adding now")     
-            player = new Player(data.name, data.color, data.identifier);
+            player = new Player(data.name, data.color, data.identifier, socket.identifier);
             world.addPlayer(player);
         }
 
@@ -113,9 +126,21 @@ io.on('connection', function(socket) {
     // when the client sends a save command
     socket.on('save-state', function ( data ) {
         world.saveState()        
-    })
+    });
+
+    socket.on('disconnect', function ( data ) {
+        console.log("Player Disconnected");
+        var player = world.getPlayerFromSocketIdentifier(socket.identifier);
+        if (player) {
+            console.log("Player with identifier found!!")
+            console.log(player)
+            socket.broadcast.emit('player-disconnected', player.serialize())
+        }
+    });
 
 });
+
+
 
 // web server 
 http.listen(config.port, function(){

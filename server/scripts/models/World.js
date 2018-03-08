@@ -88,6 +88,18 @@ var World = function() {
         return null;
     }
 
+    this.getPlayerFromSocketIdentifier = function ( socketIdentifier ) {
+
+        for(var i=0; i<this.players.length; i++){
+            var player = this.players[i];
+            if(player.socketIdentifier == socketIdentifier) {
+                return player;
+            }
+        }
+
+        return null;
+    }
+
     this.serialize = function() {
 
         let serializedSprites = [];
@@ -178,6 +190,7 @@ var World = function() {
     }
 
     this.generateEnvironment = function ( ) {
+
         var floor = new Sprite(
             'cube', 
             'floor', 
@@ -187,7 +200,9 @@ var World = function() {
             'gray',
             '/static/textures/floor.jpg'
         );
+
         this.addEnvironmentSprite(floor)
+
     }
     
 

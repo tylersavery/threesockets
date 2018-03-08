@@ -46,6 +46,18 @@ class MainScene extends BaseScene {
 
     });
 
+    self._socket.on('player-disconnected', function( player ) {
+      console.log("Disconnected");
+      console.log("player", player)
+      console.log("sprite", player.sprite)
+
+      var playerSprite = self._sprites[player.sprite.identifier]
+      if (playerSprite ) {
+        playerSprite.material.color.setHex( 0xff0000 );
+      }
+
+    });
+
     self._socket.on('environment', function ( data ) {
       
       var sprites = data.sprites;
