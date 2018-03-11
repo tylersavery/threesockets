@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: path.resolve(__dirname, '..', 'client', 'scripts', 'Client.js'),
-  watch: true,
+  watch: false,
   module: {
     rules: [
       {
