@@ -19,7 +19,11 @@ const configFile = require('../../config/config.js');
 const config = configFile[env];
 
 //db
-mongoose.connect(config.db);
+var useDatabase = false;
+if(useDatabase) {
+    mongoose.connect(config.db);
+}
+
 
 //serve index
 app.get('/', function(req, res){
