@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import 'three/examples/js/controls/OrbitControls'
 import io from 'socket.io-client'
+import Vue from 'vue'
 
 import * as Utils from '../../../common/scripts/utils'
 
@@ -26,7 +27,7 @@ class BaseScene {
     this._renderer = new THREE.WebGLRenderer()
     this._renderer.setPixelRatio(window.devicePixelRatio)
     this._renderer.setSize(window.innerWidth, window.innerHeight)
-    document.body.appendChild(this._renderer.domElement)
+    document.getElementById('canvas').appendChild(this._renderer.domElement)
 
     if(this._settings.useOrbitalControls){
       this._controls = new THREE.OrbitControls(this._camera, this._renderer.domElement)
@@ -42,6 +43,17 @@ class BaseScene {
     this._socket = io();
 
     this._keyboard = new Utils.KeyboardState;
+
+
+    
+    Vue.config.debug = true
+    this._hud = new Vue({
+      el: '#app',
+      data: {
+        promptName: true
+      }
+    });
+
 
   }
 

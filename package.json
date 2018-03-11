@@ -32,12 +32,14 @@
     "@types/nconf": "0.0.37",
     "@types/socket.io": "^1.4.31",
     "@types/three": "^0.89.11",
+    "@types/vue": "^2.0.0",
     "express": "^4.16.2",
     "lodash": "^4.17.5",
     "mongoose": "^5.0.7",
     "nconf": "^0.10.0",
     "socket.io": "^2.0.4",
     "socket.io-client": "^2.0.4",
-    "three": "^0.90.0"
+    "three": "^0.90.0",
+    "vue": "^2.5.13"
   }
 }

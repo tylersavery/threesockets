@@ -9,3 +9,11 @@ body {
     overflow: hidden;
     // background-image:url('../img/toronto.jpeg')
 }
+
+.hud-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
