@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config ./config/webpack.config.js",
-    "postinstall": "webpack --config ./config/webpack.config.js",
+    "postinstall": "echo '{\"sprites\":[],\"players\":[]}' > world.json",
     "serve": "node ./server/scripts/server.js",
     "start": "node ./server/scripts/server.js",
     "clear": "node ./server/scripts/server.js --clear"
