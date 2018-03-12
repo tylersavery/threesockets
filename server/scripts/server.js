@@ -19,8 +19,7 @@ const configFile = require('../../config/config.js');
 const config = configFile[env];
 
 //db
-var useDatabase = false;
-if(useDatabase) {
+if(config.useDatabase) {
     mongoose.connect(config.db);
 }
 
@@ -143,7 +142,6 @@ io.on('connection', function(socket) {
     });
 
 });
-
 
 
 // web server 
