@@ -13,6 +13,11 @@ module.exports = {
         db: 'mongodb://localhost/spaceventure',
         root: rootPath,
         port: 3000
-    }
+    },
+    production: {
+        db: 'mongodb://localhost/spaceventure',
+        root: rootPath,
+        port: 80
+    },
 
 }
