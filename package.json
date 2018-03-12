@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config ./config/webpack.config.js",
     "serve": "node ./server/scripts/server.js",
+    "start": "node ./server/scripts/server.js",
     "clear": "node ./server/scripts/server.js --clear"
   },
   "keywords": [],
