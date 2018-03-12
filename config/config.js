@@ -17,7 +17,7 @@ module.exports = {
     staging: {
         db: 'mongodb://localhost/spaceventure',
         root: rootPath,
-        port: 443
+        port: process.env.PORT || 3000
     },
 
 }
