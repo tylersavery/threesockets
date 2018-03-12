@@ -14,7 +14,7 @@ module.exports = {
         root: rootPath,
         port: 3000
     },
-    production: {
+    staging: {
         db: 'mongodb://localhost/spaceventure',
         root: rootPath,
         port: 80
